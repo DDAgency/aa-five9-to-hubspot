@@ -1,0 +1,18 @@
+{
+  "name": "aa-five9",
+  "version": "1.0.0",
+  "description": "A webhook catching call outcomes from Five9",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Fall",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "https": "^1.0.0",
+    "nocache": "^3.0.4",
+    "request": "^2.88.2"
+  }
+}
