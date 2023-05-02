@@ -68,9 +68,11 @@ app.post('/', (req, res) => {
 
     const properties = {
         'firstname': data.first_name,
-        'lastname': data.last_name 'phone': data.phone1,
+        'lastname': data.last_name,
+        'phone': data.phone1,
         'phone_number_2': data.phone2,
-        'phone_number_3': data.phone3 'email': data.email,
+        'phone_number_3': data.phone3,
+        'email': data.email,
         'district': data['District'],
         'date': data['Date of Birth'],
         'address': data.street,
