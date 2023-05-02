@@ -44,7 +44,7 @@ app.post('/', (req, res) => {
             },
             body: JSON.stringify({
                 properties: props
-            })
+            }),
             json: true,
         };
 
