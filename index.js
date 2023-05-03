@@ -58,7 +58,7 @@ app.post('/', (req, res) => {
     }
 
 
-    console.log(req.body);
+    console.log(req);
     console.log(req.query);
 
     const data = req.body;
