@@ -62,6 +62,10 @@ app.post('/', (req, res) => {
     console.log(req.params);
     console.log(req.query);
 
+     res.json({
+                received: true
+            });
+
     // const data = req.body;
 
     // const recordId = req.body['Record Id - Contact'] ? req.body['Record Id - Contact'] : false;
