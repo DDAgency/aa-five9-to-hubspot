@@ -53,11 +53,12 @@ function updateContact(idPropType, idProp, props) {
     };
 
     console.log(options);
-
-    request(options, function(error, response, body) {
-        if (error) throw new Error(error);
   res.status(200).end();
-    });
+
+  //   request(options, function(error, response, body) {
+  //       if (error) throw new Error(error);
+  // res.status(200).end();
+  //   });
 }
 
 
@@ -68,7 +69,7 @@ const data = req.body;
 
 console.log(data);
 
-const recordId = req.body['Record Id - Contact'] ? req.body['Record Id - Contact'] : false;
+const recordId = req.body['Record ID - Contact'] ? req.body['Record ID - Contact'] : false;
 const recordEmail = req.body.email ? req.body.email : false;
 
 const properties = {
