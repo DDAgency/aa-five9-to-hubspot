@@ -34,7 +34,7 @@ function updateContact(idPropType, idProp, props) {
     var url;
 
     if (idPropType = 'email') {
-        url = `https://api.hubapi.com/crm/v3/objects/contacts?idProperty=${idProp}`;
+        url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}?idProperty=email`;
     } else {
         url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}`;
     }
@@ -87,7 +87,7 @@ const properties = {
     'state': data.state,
     'auto_dialer_create_date': data['Create Date'],
     'direction_of_call': data['Direction of Call'],
-    'notes_last_updated': data['Last Activity Date'],
+    // 'notes_last_updated': data['Last Activity Date'],
     'last_agent': data['Last Agent'],
     'time_or_date_of_call': data['Time or Date of Call'],
     'time_or_length_of_call': data['Time or Length of Call'],
