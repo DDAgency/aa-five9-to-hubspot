@@ -34,7 +34,7 @@ function updateContact(idPropType, idProp, props) {
     var url;
 
     if (idPropType = 'email') {
-        url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}?idProperty=email`;
+        url = `https://api.hubapi.com/crm/v3/objects/contacts?idProperty=${idProp}`;
     } else {
         url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}`;
     }
@@ -49,8 +49,7 @@ function updateContact(idPropType, idProp, props) {
         },
         body: JSON.stringify({
                 properties: props
-            }),
-        json: true,
+            })
     };
 
     console.log(options);
