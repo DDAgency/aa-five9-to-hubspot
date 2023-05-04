@@ -78,7 +78,7 @@ app.post('/', (req, res) => {
         'phone_number_3': data.phone3,
         'email': data.email,
         'district': data['District'],
-        'date': data['Date of Birth'] ? new Date(data['Date of Birth']).setUTCHours(0,0,0,0) * 1000 : '',
+        'date': data['Date of Birth'] ? new Date(data['Date of Birth']).setUTCHours(0,0,0,0) : '',
         'address': data.street,
         'street_address_2': data['Street Address 2'],
         'zip': data.zip,
