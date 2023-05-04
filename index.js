@@ -44,7 +44,7 @@ app.post('/', (req, res) => {
             headers: {
                 'content-type': 'application/json',
                 'accept': 'application/json',
-                'Authorization': `Bearer ${authtoken}`
+                'Authorization': `Bearer ${authToken}`
             },
             body: JSON.stringify({
                 properties: props
