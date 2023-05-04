@@ -54,13 +54,11 @@ app.post('/', (req, res) => {
         };
 
         console.log(options);
-            res.status(200).end();
 
-
-      //   request(options, function(error, response, body) {
-      //       if (error) throw new Error(error);
-      // res.status(200).end();
-      //   });
+        request(options, function(error, response, body) {
+            if (error) throw new Error(error);
+      res.status(200).end();
+        });
     }
 
 
@@ -82,7 +80,7 @@ app.post('/', (req, res) => {
         'phone_number_3': data.phone3,
         'email': data.email,
         'district': data['District'],
-        'date': data['Date of Birth'],
+        'date': data['Date of Birth'] ? new Date(data['Date of Birth']).setUTCHours(0,0,0,0) * 1000 : '',
         'address': data.street,
         'street_address_2': data['Street Address 2'],
         'zip': data.zip,
