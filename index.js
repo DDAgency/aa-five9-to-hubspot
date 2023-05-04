@@ -5,6 +5,7 @@ const cors = require("cors");
 const app = express();
 const https = require("https");
 const request = require('request');
+const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 const nocache = require('nocache');
 const authToken = process.env.HS_AUTH_TOKEN;
@@ -20,6 +21,8 @@ app.use(nocache());
 
 /* Allows app to handle JSON POST data */
 app.use(express.json());
+
+app.use(bodyParser.json());
 
 
 app.post('/', (req, res) => {
@@ -62,9 +65,7 @@ app.post('/', (req, res) => {
     console.log(req.params);
     console.log(req.query);
 
-     res.json({
-                received: true
-            });
+res.status(200).end();
 
     // const data = req.body;
 
