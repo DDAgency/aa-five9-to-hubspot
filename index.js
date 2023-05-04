@@ -47,9 +47,7 @@ app.post('/', (req, res) => {
                 'accept': 'application/json',
                 'Authorization': `Bearer ${authToken}`
             },
-            body: JSON.stringify({
-                properties: props
-            }),
+            body: JSON.stringify(props),
             json: true,
         };
 
