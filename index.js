@@ -22,8 +22,9 @@ app.use(nocache());
 /* Allows app to handle JSON POST data */
 app.use(express.json());
 
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 
 app.post('/', (req, res) => {
@@ -115,4 +116,4 @@ app.post('/', (req, res) => {
 /* ========== Run the app ========== */
 app.listen(port, () => {
     console.log('App listening at http://localhost:' + port)
-})
+});
