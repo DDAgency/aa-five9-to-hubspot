@@ -44,7 +44,7 @@ app.post('/', (req, res) => {
             headers: {
                 'content-type': 'application/json',
                 'accept': 'application/json',
-                'Authorization': `Bearer ${HS_AUTH_TOKEN}`
+                'Authorization': `Bearer ${authtoken}`
             },
             body: JSON.stringify({
                 properties: props
@@ -67,6 +67,8 @@ app.post('/', (req, res) => {
 
 
     const data = req.body;
+
+    console.log(data);
 
     const recordId = req.body['Record Id - Contact'] ? req.body['Record Id - Contact'] : false;
     const recordEmail = req.body.email ? req.body.email : false;
