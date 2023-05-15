@@ -33,7 +33,7 @@ app.post('/', (req, res) => {
 function updateContact(idPropType, idProp, props) {
     var url;
 
-    if (idPropType = 'email') {
+    if (idPropType == 'email') {
         url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}?idProperty=email`;
     } else {
         url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}`;
