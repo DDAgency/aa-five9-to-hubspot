@@ -55,10 +55,10 @@ function updateContact(idPropType, idProp, props) {
     console.log(options);
   res.status(200).end();
 
-  //   request(options, function(error, response, body) {
-  //       if (error) throw new Error(error);
-  // res.status(200).end();
-  //   });
+    request(options, function(error, response, body) {
+        if (error) throw new Error(error);
+        res.status(200).end();
+    });
 }
 
 
