@@ -23,89 +23,136 @@ app.use(nocache());
 app.use(express.json());
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 
 
 app.post('/', (req, res) => {
 
 
-function updateContact(idPropType, idProp, props) {
-    var url;
+    function updateContact(idPropType, idProp, props) {
+        var url;
 
-    if (idPropType == 'email') {
-        url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}?idProperty=email`;
-    } else {
-        url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}`;
-    }
+        if (idPropType == 'email') {
+            url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}?idProperty=email`;
+        } else {
+            url = `https://api.hubapi.com/crm/v3/objects/contacts/${idProp}`;
+        }
 
-    var options = {
-        method: "PATCH",
-        url: url,
-        headers: {
-            'content-type': 'application/json',
-            'accept': 'application/json',
-            'Authorization': `Bearer ${authToken}`
-        },
-        body: JSON.stringify({
+        var options = {
+            method: "PATCH",
+            url: url,
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({
                 properties: props
             })
-    };
+        };
 
-    console.log(options);
-  res.status(200).end();
+        console.log(options);
 
-    request(options, function(error, response, body) {
-        if (error) throw new Error(error);
-        res.status(200).end();
-    });
+        request(options, function(error, response, body) {
+            if (error) throw new Error(error);
+            res.status(200).end();
+        });
+    }
+
+
+    function createNote(props, associations) {
+        var url;
+
+        url = 'https://api.hubspot.com/crm/v3/objects/notes';
+
+        var options = {
+            method: "POST",
+            url: url,
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({
+                properties: props,
+                associations: associations
+            })
+        };
+
+        request(options, function(error, response, body) {
+            if (error) throw new Error(error);
+            res.status(200).end();
+        });
+    }
+
+
+
+
+    const data = req.body;
+
+    console.log(data);
+
+    const recordId = req.body['Record ID - Contact'] ? req.body['Record ID - Contact'] : false;
+    const recordEmail = req.body.email ? req.body.email : false;
+    const recordComments = req.body.comments ? req.body.comments : false;
+    const now = Date.now();
+
+    const contactProperties = {
+        'firstname': data.first_name,
+        'lastname': data.last_name,
+        'phone': data.phone1,
+        'phone_number_2': data.phone2,
+        'phone_number_3': data.phone3,
+        'email': data.email,
+        'district': data['District'],
+        'date': data['Date of Birth'] ? new Date(data['Date of Birth']).setUTCHours(0, 0, 0, 0) : '',
+        'address': data.street,
+        'street_address_2': data['Street Address 2'],
+        'zip': data.zip,
+        'city': data.city,
+        'state': data.state,
+        'auto_dialer_create_date': data['Create Date'],
+        'direction_of_call': data['Direction of Call'],
+        // 'notes_last_updated': data['Last Activity Date'],
+        'last_agent': data['Last Agent'],
+        'time_or_date_of_call': data['Time or Date of Call'],
+        'time_or_length_of_call': data['Time or Length of Call'],
+        'last_disposition': data.disposition_name
+    }
+
+    const noteProperties = {
+        'hs_timestamp': now,
+        'hs_note_body': data.comments ? data.comments : '';
+    }
+
+    const noteAssociations = [{
+        'to': {
+            'id': recordId
+        },
+        'types': [{
+            "associationCategory": "HUBSPOT_DEFINED",
+            "associationTypeId": 10
+        }]
+    }]
+
+
+if(recordComments && recordId){
+        updateContact('recordId', recordId, contactProperties);
+        createNote(noteProperties, noteAssociations);
 }
 
-
-
-
-
-const data = req.body;
-
-console.log(data);
-
-const recordId = req.body['Record ID - Contact'] ? req.body['Record ID - Contact'] : false;
-const recordEmail = req.body.email ? req.body.email : false;
-
-const properties = {
-    'firstname': data.first_name,
-    'lastname': data.last_name,
-    'phone': data.phone1,
-    'phone_number_2': data.phone2,
-    'phone_number_3': data.phone3,
-    'email': data.email,
-    'district': data['District'],
-    'date': data['Date of Birth'] ? new Date(data['Date of Birth']).setUTCHours(0,0,0,0) : '',
-    'address': data.street,
-    'street_address_2': data['Street Address 2'],
-    'zip': data.zip,
-    'city': data.city,
-    'state': data.state,
-    'auto_dialer_create_date': data['Create Date'],
-    'direction_of_call': data['Direction of Call'],
-    // 'notes_last_updated': data['Last Activity Date'],
-    'last_agent': data['Last Agent'],
-    'time_or_date_of_call': data['Time or Date of Call'],
-    'time_or_length_of_call': data['Time or Length of Call'],
-    'last_disposition': data.disposition_name
-}
-
-
-if (recordId) {
-    updateContact('recordId', recordId, properties);
-} else if (recordEmail) {
-    updateContact('email', recordEmail, properties);
-} else {
-    res.json({
-       'error': 'No unique identifier found'
-    });
-
-}
+    else if (recordId) {
+        updateContact('recordId', recordId, contactProperties);
+    } else if (recordEmail) {
+        updateContact('email', recordEmail, contactProperties);
+    } else {
+        res.json({
+            'error': 'No unique identifier found'
+        });
+    }
 
 
 });
@@ -113,5 +160,5 @@ if (recordId) {
 
 /* ========== Run the app ========== */
 app.listen(port, () => {
-console.log('App listening at http://localhost:' + port)
+    console.log('App listening at http://localhost:' + port)
 });
