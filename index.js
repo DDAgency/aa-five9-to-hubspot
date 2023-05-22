@@ -125,7 +125,7 @@ app.post('/', (req, res) => {
 
     const noteProperties = {
         'hs_timestamp': now,
-        'hs_note_body': data.comments ? data.comments : '';
+        'hs_note_body': data.comments ? data.comments : ''
     }
 
     const noteAssociations = [{
