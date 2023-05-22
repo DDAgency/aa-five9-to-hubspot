@@ -84,7 +84,6 @@ app.post('/', (req, res) => {
 
         request(options, function(error, response, body) {
             if (error) throw new Error(error);
-            res.status(200).end();
         });
     }
 
@@ -140,10 +139,9 @@ app.post('/', (req, res) => {
 
 
 if(recordComments && recordId){
-        updateContact('recordId', recordId, contactProperties);
         createNote(noteProperties, noteAssociations);
+        updateContact('recordId', recordId, contactProperties);
 }
-
     else if (recordId) {
         updateContact('recordId', recordId, contactProperties);
     } else if (recordEmail) {
