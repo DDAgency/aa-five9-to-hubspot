@@ -137,6 +137,27 @@ app.post('/', (req, res) => {
         'Yaney Hatfield': 202881385 
     };
 
+    const callOutcomes = {
+        "Abandon": "d5d2a784-4f85-4927-85da-20b8a5612145",
+        "Aged Out": "c4a4bdf6-ddc0-4765-acf8-c366aae58e64",
+        "Already Graduated": "ed81eb16-51e7-41a2-8267-2eb0a7302f10",
+        "Application Started/Completed": "35ef124a-5786-41d9-ba0a-cc2211c9bfc4",
+        "Bad Phone Numbers": "c3bcb01e-0035-4889-808e-a6d77b7f183e",
+        "Caller busy, couldn't talk.": "904f61fe-0815-4b2a-8a60-07f4059b5cac",
+        "Deceased": "1234afd0-c31d-46bd-b18a-21538331202e",
+        "Declined Program": "5a5ea465-9666-4220-951b-1f0dde025050",
+        "Do Not Contact": "99a71316-7415-47a9-ac7e-f710b0780bd5",
+        "Interested, Not Ready To Commit.": "425172fb-0d29-4e42-aedd-bc837844b338",
+        "Left voicemail + text.": "4355cc52-d3e4-46d2-a09c-96f910c78319",
+        "Local Follow Up Needed": "910a0bc8-e589-49b3-84dd-bcd9bb989a1b",
+        "Moved out of area": "6408fc1f-3e5d-4283-9bf6-ecb2a2409300",
+        "No Answer": "887abc28-1024-4b1c-af9d-20cfb41432ef",
+        "No/Full VM + text. ": "1c5daf0b-0edf-4ec2-b9e4-ba05bcad11f7",
+        "Registration Link Sent": "68a60c26-e1b3-4b0b-bd90-b1de0598182c"
+        "Spanish Callback Needed": "24a2c8ff-a391-498e-b1aa-b7de502fece1",
+        "Underage" "d8d3007a-e092-4ae4-af58-84527ac4ba62"
+    };
+
     const contactProperties = {
         'firstname': data.first_name,
         'lastname': data.last_name,
@@ -166,7 +187,7 @@ app.post('/', (req, res) => {
         'hs_call_body': data.comments ? data.comments : '',
         'hs_call_duration': data['Time or Length of Call'],
         'hs_call_to_number': data.phone1 ? data.phone1 : '',
-        'hs_call_outcome': data.disposition_name
+        'hs_call_disposition': callOutcomes[ata.disposition_name]
     };
 
     const callAssociations = [{
