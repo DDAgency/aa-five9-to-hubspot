@@ -87,6 +87,30 @@ app.post('/', (req, res) => {
         });
     }
 
+        function createCall(props, associations) {
+        var url;
+
+        url = 'https://api.hubspot.com/crm/v3/objects/calls';
+
+        var options = {
+            method: "POST",
+            url: url,
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({
+                properties: props,
+                associations: associations
+            })
+        };
+
+        request(options, function(error, response, body) {
+            if (error) throw new Error(error);
+        });
+    }
+
 
 
 
@@ -98,6 +122,20 @@ app.post('/', (req, res) => {
     const recordEmail = req.body.email ? req.body.email : false;
     const recordComments = req.body.comments ? req.body.comments : false;
     const now = Date.now();
+
+    const agents = { 
+        'Jesse Corona': 140837421,
+        'Janette Reyes': 140837422,
+        'Joselyn Reyes': 140837423,
+        'Ryan Graves': 154085888,
+        'Lisa Ferguson': 140844419,
+        'Erica Mattey': 154090129,
+        'Michelle Smith': 239479718,
+        'Cindy Ramos': 446632571,
+        'Yvette Rios': 446633007,
+        'Griffin Pogue': 446633079,
+        'Yaney Hatfield': 202881385 
+    };
 
     const contactProperties = {
         'firstname': data.first_name,
@@ -120,7 +158,26 @@ app.post('/', (req, res) => {
         'time_or_date_of_call': data['Time or Date of Call'],
         'time_or_length_of_call': data['Time or Length of Call'],
         'last_disposition': data.disposition_name
-    }
+    };
+
+    const callProperties = {
+        'hs_timestamp': now,
+        'hubspot_owner_id': agents[data['Last Agent']],
+        'hs_call_body': data.comments ? data.comments : '',
+        'hs_call_duration': data['Time or Length of Call'],
+        'hs_call_to_number': data.phone1 ? data.phone1 : '',
+        'hs_call_status': data.disposition_name
+    };
+
+    const callAssociations = [{
+        'to': {
+            'id': recordId
+        },
+        'types': [{
+            "associationCategory": "HUBSPOT_DEFINED",
+            "associationTypeId": 10
+        }]
+    }]
 
     const noteProperties = {
         'hs_timestamp': now,
@@ -138,12 +195,14 @@ app.post('/', (req, res) => {
     }]
 
 
-if(recordComments && recordId){
+    if(recordComments && recordId){
         createNote(noteProperties, noteAssociations);
+        createCall(callProperties, callAssociations);
         updateContact('recordId', recordId, contactProperties);
-}
+    }
     else if (recordId) {
         updateContact('recordId', recordId, contactProperties);
+        createCall(callProperties, callAssociations);
     } else if (recordEmail) {
         updateContact('email', recordEmail, contactProperties);
     } else {
