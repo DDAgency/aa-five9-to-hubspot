@@ -189,7 +189,7 @@ app.post('/', (req, res) => {
         'hs_call_body': data.comments ? data.comments : '',
         'hs_call_duration': data['Time or Length of Call'],
         'hs_call_to_number': data.phone1 ? data.phone1 : '',
-        'hs_call_disposition': callOutcomes[ata.disposition_name]
+        'hs_call_disposition': callOutcomes[data.disposition_name]
     };
 
     const callAssociations = [{
