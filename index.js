@@ -186,7 +186,7 @@ app.post('/', (req, res) => {
         "No Disposition": "0c407d74-5af0-447a-8729-d902a004ca8c",
         "No Response From Caller": "0e8191bd-6bb0-4e0e-bebc-750f5c42b303",
         "Operator Intercept": "0937dea0-1f91-4910-9705-bd0cb9930338",
-        "Queue Callback Assigned": "d021ce4f-8c9b-46fc-a641-3e37b41ab617",,
+        "Queue Callback Assigned": "d021ce4f-8c9b-46fc-a641-3e37b41ab617",
         "Queue Callback Timeout": "cec5f97e-babe-4b10-a33f-f4af88342231",
         "Recycle": "a954924e-d325-4d6d-b8d5-a6abf31214db",
         "Registration Link Sent": "1a99ed31-5d4c-43eb-a944-c748eeda4424",
