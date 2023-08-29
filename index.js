@@ -185,7 +185,7 @@ app.post('/', (req, res) => {
 
     const callProperties = {
         'hs_timestamp': now,
-        'hubspot_owner_id': agents[data['Last Agent']],
+        'hubspot_owner_id': data.last_agent_name ? agents[data.last_agent_name] : agents[data.full_name],
         'hs_call_body': data.comments ? data.comments : '',
         'hs_call_duration': data['Time or Length of Call'],
         'hs_call_to_number': data.phone1 ? data.phone1 : '',
