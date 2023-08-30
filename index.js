@@ -141,10 +141,10 @@ app.post('/', (req, res) => {
 
     const callOutcomes = {
         "3rd Party Transfer": "0cc2ead9-a595-4cbe-9cb0-fcd9247d7fe9",
-        "Abandon": "d5d2a784-4f85-4927-85da-20b8a5612145",
-        "Aged Out": "c4a4bdf6-ddc0-4765-acf8-c366aae58e64",
+        "Abandon": "3b10a09f-cab5-4c6a-8607-46ba5b0ebc98",
+        "Aged Out": "786f2966-c7df-4fb1-9831-95b242335dac",
         "Agent Error": "31a12cf5-691c-4f9c-8655-3c6edd25e546",
-        "Already Graduated": "ed81eb16-51e7-41a2-8267-2eb0a7302f10",
+        "Already Graduated": "61531299-0f71-40e1-b4a5-ac1f011e24ef",
         "Answering Machine": "cb8b5ecd-2856-4d99-aa69-8c8bec6c6a52",
         'Application Completed': "ec7d1488-bcec-4a93-9c21-2f61af6e4843",
         "Application Completed_AIP": "4d232a70-a89a-4b66-b0c2-4b708235ea01",
@@ -158,6 +158,8 @@ app.post('/', (req, res) => {
         "Call Back": "8a793b62-5602-448c-9422-5a70c34c173a",
         "Call Back_AIP": "71ee55c6-7add-4d24-bbc5-6a8adc814ee2",
         "Caller busy, couldn't talk.": "904f61fe-0815-4b2a-8a60-07f4059b5cac",
+        "Caller Disconnected": "4041fa30-d781-4e2f-a1a1-396d503b03c5",
+        "Currently Enrolled": "70dd9f56-afb5-4f19-a01d-d47b08ec9828",
         "Deceased": "e01ea084-a556-4da1-98f7-c21848d946bb",
         "Declined Program": "85a26be5-9c4c-4cc2-9bc8-88c1e5682a78",
         "Declined": "1b6f5441-2508-4c31-a9c1-d9f378e798ff",
