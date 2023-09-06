@@ -228,7 +228,7 @@ app.post('/', (req, res) => {
         'auto_dialer_create_date': data['Create Date'],
         'direction_of_call': data['Direction of Call'],
         // 'notes_last_updated': data['Last Activity Date'],
-        'last_agent': data.last_agent_name ? data.last_agent_name : data.full_name,
+        'last_agent': data.full_name ? data.full_name : data.last_agent_name,
         'time_or_date_of_call': data['Time or Date of Call'],
         'time_or_length_of_call': data['Time or Length of Call'],
         'last_disposition': data.disposition_name
